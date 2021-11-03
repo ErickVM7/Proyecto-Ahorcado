@@ -1,2 +1,2 @@
 # Proyecto
-Proyecto Curso de plataformas abiertas
+Proyecto juego ahorcado Curso de plataformas abiertas
