@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-//#include <conio.h> no esta en replit asi que se usara curses
-#include <curses.h>
+//#include <conio.h> //no esta en replit asi que se usara curses
+//#include <curses.h>
 
 #define TRUE 1
 #define FALSE 0
