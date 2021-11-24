@@ -1,0 +1,4 @@
+  Erick  ,  600
+  Tini  ,  500
+  Franvo  ,  100
+  juliet  ,  -100

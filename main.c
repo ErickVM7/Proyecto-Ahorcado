@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-//#include <conio.h> //no esta en replit asi que se usara curses
-//#include <curses.h>
+//#include <conio.h> no esta en replit asi que se usara curses
+#include <curses.h>
 
 #define TRUE 1
 #define FALSE 0
@@ -34,7 +34,7 @@ int main()
 {
     menuPrincipal();
     return 0;
-}
+}    
 
 // Funcion principal del menu
 
@@ -95,7 +95,7 @@ void menuReglas() //reglas sobre el funcionamiento del juego
    system("cls");
    printf("\n\n\t\t\tReglas\n");
    printf("\t\t\t------\n");
-   printf("\tLas reglas son las siguientes: \n1. La opción de “Nueva Partida” permite al jugador ingresar un nombre, elegir una categoría de palabras e iniciar el juego de ahorcado. \n2. La opción de “Ranking” permite observar las posiciones actuales de las mejores puntuaciones y su usuario correspondiente. \n3. Después de cada juego, la cantidad de puntos que obtuvo el jugador al final se guarda automáticamente en el sistema. hi \n4. Si el nombre ingresado ya está registrado en el sistema, se le agregara un número al final del nombre según la cantidad de veces que haya sido ingresado. \n5. La partida se inicia con 500 puntos, cada intento fallido de ingresar una letra implica una pérdida de 100 puntos. Si se ingresa la frase “Pedir ayuda”, el jugador recibirá una frase de ayuda relacionada con la palabra en juego, pero se penalizará con 200 puntos. \n6. El juego se pierde si el jugador no logra encontrar la palabra en menos de 5 intentos o llega a 0 puntos, lo que suceda primero. En caso de perder, saldrá la frase “Ahorcado” y juntos con dos opciones: “Volver al Menú” (pantalla inicial) o “Salir” (el cual permite finalizar el juego). \n7. Si el jugador gana, saldrá la frase “FELICIDADES, LOGRÓ COMPLETAR LA PALABRA”, y se guardará la puntuación. \n8. Debera colocar la letra en minuscula");
+   printf("\tLas reglas son las siguientes: \n1. La opción de “Nueva Partida” permite al jugador ingresar un nombre, elegir una categoría de palabras e iniciar el juego de ahorcado. \n2. La opción de “Ranking” permite observar las posiciones actuales de las mejores puntuaciones y su usuario correspondiente. \n3. Después de cada juego, la cantidad de puntos que obtuvo el jugador al final se guarda automáticamente en el sistema. \n4. Si el nombre ingresado ya está registrado en el sistema, se le agregara un número al final del nombre según la cantidad de veces que haya sido ingresado. \n5. La partida se inicia con 500 puntos, cada intento fallido de ingresar una letra implica una pérdida de 100 puntos. \n6. El juego se pierde si el jugador no logra encontrar la palabra en menos de 5 intentos o llega a 0 puntos, lo que suceda primero. En caso de perder, saldrá la frase “Ahorcado” y juntos con dos opciones: “Volver al Menú” (pantalla inicial) o “Salir” (el cual permite finalizar el juego). \n7. Si el jugador gana, saldrá la frase “FELICIDADES, LOGRÓ COMPLETAR LA PALABRA”, y se guardará la puntuación. \n8. Debera colocar la letra en minuscula");
 
    printf("\n\nIngrese un número para regresar al menú: ");
    scanf("%d", &opcion);
@@ -114,18 +114,42 @@ void menuReglas() //reglas sobre el funcionamiento del juego
 void menuRankings() //funcion de los records
 { 
   int main ();
-  printf("\n\n\t\t\tRankings\n");
-  printf("\t\t\t------------------------\n");
+  int opcion;
+  char repetir = TRUE;
+  do{
+   printf("\n\n\t\t\tRankings\n");
+   printf("\t\t\t--------\n");
+   FILE * flujo=fopen("record.txt","r");
+      if (flujo==NULL) 
+        perror("Error al abrir el archivo");
+      char caracter;
+      while(feof(flujo)==0){
+        caracter = fgetc(flujo);
+        printf("%c",caracter);
+      }
+      fclose(flujo);
+   printf("\n\nIngrese un número para regresar al menú: ");
+   scanf("%d", &opcion);         
+  
+ switch (opcion)
+        {
+           default: 
+              repetir = FALSE;
+              break;
+             
+        }
+    
+  }while (repetir);
+
   
 }
 
-void categorias() //menu de categorias para que el usuario elija y escriba su nombre
+void categorias() //menu de categorias para que el usuario elija y escriba su nombr
 {
-  char nombrejugador[100];
+  
   printf("\n\n\t\t\tNUEVO JUEGO\n");
   printf("\t\t\t-----------\n");
-  printf("Digite su nombre: \n\n");
-  scanf("%s",nombrejugador);
+ 
   int op;
   system("cls");
   printf("Categorías \n\n");
@@ -133,6 +157,7 @@ void categorias() //menu de categorias para que el usuario elija y escriba su no
   printf(" 2. Frutas\n");
   printf(" 3. Animales\n");
   printf(" 4. Deportes\n");
+  printf(" 5. Salir\n");
   printf("Selecione una categoría: \n");
   scanf("%i",&op);
   
@@ -141,6 +166,7 @@ void categorias() //menu de categorias para que el usuario elija y escriba su no
   if (op==2) categoriaingresada(op);
   if (op==3) categoriaingresada(op);
   if (op==4) categoriaingresada(op); // selecionar categoría  
+  if (op==5) menuPrincipal();
   else
      categorias();
   
@@ -171,6 +197,9 @@ void categoriaingresada(int op){ //Lista de palabras de cada categoría
   }
 }
 void juego(char palabras[][15],char nombre[]) { //recibe la opcion y el nombre de la categoria para esocger de manera aleatoria una palabara de esa categoria
+  char nombrejugador[100];
+  printf("\n\n Digite su nombre: \n\n");
+  scanf("%s",nombrejugador);
   int opcion,i,j,k,longitud,espacios,puntos=600;//variables que se usaran
   int otravez;
   char letra;
@@ -204,7 +233,27 @@ void juego(char palabras[][15],char nombre[]) { //recibe la opcion y el nombre d
    if (intentos==7){ //verifica si todavia tiene intentos
      printf("\n\n PERDISTE!! :C ");
      printf("La solucion era; %s \n\n",palabras[opcion]);
-     printf("Presione una tecla para volver a jugar...");
+     printf("\n\n Puntuacion final: %d \n\n",puntos);
+      FILE * flujo = fopen("record.txt","a");
+     if (flujo==NULL){
+       perror("Error al abrir el archivo\n\n");
+     } else{
+       fputs(" ",flujo);
+       fputs(" ",flujo);
+       fputs(nombrejugador,flujo);
+       fputs(" ",flujo);
+       fputs(" ",flujo);
+       fputs(",",flujo);
+       fputs(" ",flujo);
+       fputs(" ",flujo);
+       fprintf(flujo,"%d",puntos);
+       fputs("\n",flujo);
+     }
+     fflush(flujo);
+     fclose(flujo);
+
+
+     printf("Presione 1 para volver a jugar o 5 para salir...");
      scanf(" %i",&otravez);
       switch(otravez){
       case 1:
@@ -228,6 +277,25 @@ void juego(char palabras[][15],char nombre[]) { //recibe la opcion y el nombre d
 		
 	 if (espacios == 0){
 			printf("\n\n FELICIDADES GANASTE!! :) \n\n");
+      printf("\n\n Puntuacion final: %d \n\n",puntos);
+      FILE * flujo = fopen("record.txt","a");
+     if (flujo==NULL){
+       perror("Error al abrir el archivo\n\n");
+     } else{
+       fputs(" ",flujo);
+       fputs(" ",flujo);
+       fputs(nombrejugador,flujo);
+       fputs(" ",flujo);
+       fputs(" ",flujo);
+       fputs(",",flujo);
+       fputs(" ",flujo);
+       fputs(" ",flujo);
+       fprintf(flujo,"%d",puntos);
+       fputs("\n",flujo);
+     }
+     fflush(flujo);
+     fclose(flujo);
+
 			printf(" Presione 1 para volver a jugar o 5 para salir... ");
       scanf(" %i",&otravez);
       switch(otravez){
@@ -271,7 +339,7 @@ void juego(char palabras[][15],char nombre[]) { //recibe la opcion y el nombre d
 void fallos(int intentos) { 
 	switch (intentos) {
 	case 0:
-		puts("Comienza el juego, exitos! :D");
+		puts("Comienza el juego, exitos! ^_^");
 		puts("  _ _ ");
 		puts(" |   | ");
 		puts(" |    ");
@@ -280,7 +348,7 @@ void fallos(int intentos) {
 		puts("_|_  ");
 		break;
 	case 1:
-		puts("Aun no ha fallado, sigue asi! ^_^");
+		puts(" Oh no letra incorrecta! ");
 		puts("  _ _ ");
 		puts(" |   | ");
 		puts(" |    ");
@@ -289,6 +357,7 @@ void fallos(int intentos) {
 		puts("_|_  ");
 		break;
 	case 2:
+    puts("  Otra incorrecta noooo ");
 		puts("  _ _ ");
 		puts(" |   | ");
 		puts(" |   O ");
@@ -297,6 +366,7 @@ void fallos(int intentos) {
 		puts("_|_  ");
 		break;
 	case 3:
+    puts("  Le quedan 4 vidas! ");
 		puts("  _ _ ");
 		puts(" |   | ");
 		puts(" |   O ");
@@ -305,6 +375,7 @@ void fallos(int intentos) {
 		puts("_|_  ");
 		break;
 	case 4:
+    puts("  3 vidas restantes :O ");
 		puts("  _ _ ");
 		puts(" |   | ");
 		puts(" |   O ");
@@ -313,6 +384,7 @@ void fallos(int intentos) {
 		puts("_|_  ");
 		break;
 	case 5:
+    puts("  2 vidas le quedan :( ");  
 		puts("  _ _ ");
 		puts(" |   | ");
 		puts(" |   O ");
@@ -321,6 +393,7 @@ void fallos(int intentos) {
 		puts("_|_  ");
 		break;
 	case 6:
+    puts(" Un fallo mas y se acaba la partida :( ");
 		puts("  _ _ ");
 		puts(" |   | ");
 		puts(" |   O ");
@@ -336,7 +409,12 @@ void fallos(int intentos) {
 		puts(" |   | ");
 		puts("_|_ / \\ ");
 		break;
-	default: puts("Fin del juego");
+	default: puts("Fin del juego, gracias por jugar!!!");
 	}
 }
+
+// guardar los puntajes en un archivo para cuando el juego se cierra mantener los datos
+
+  
+
 
