@@ -123,7 +123,7 @@ void menuRankings() //funcion de los records
       if (flujo==NULL) 
         perror("Error al abrir el archivo");
       char caracter;
-      while(feof(flujo)==0){
+      while(feof(flujo)==0){  
         caracter = fgetc(flujo);
         printf("%c",caracter);
       }
