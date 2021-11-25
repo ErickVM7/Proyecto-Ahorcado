@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-//#include <conio.h> no esta en replit asi que se usara curses
-#include <curses.h>
 
+
+//Se define para ciclos de los menu
 #define TRUE 1
 #define FALSE 0
 
@@ -119,7 +119,7 @@ void menuRankings() //funcion de los records
   do{
    printf("\n\n\t\t\tRankings\n");
    printf("\t\t\t--------\n");
-   FILE * flujo=fopen("record.txt","r");
+   FILE * flujo=fopen("record.txt","r"); //abrimos el archivo de txt en modo read
       if (flujo==NULL) 
         perror("Error al abrir el archivo");
       char caracter;
@@ -151,7 +151,7 @@ void categorias() //menu de categorias para que el usuario elija y escriba su no
   printf("\t\t\t-----------\n");
  
   int op;
-  system("cls");
+  system("clear");
   printf("Categorías \n\n");
   printf(" 1. Países\n");
   printf(" 2. Frutas\n");
@@ -218,7 +218,7 @@ void juego(char palabras[][15],char nombre[]) { //recibe la opcion y el nombre d
 
   do{ //ciclo del juego
     aciertos = 0;
-    system("cls");
+    system("clear");
     printf("\n\t\t\t\tEL AHORCADO\n\n");
     printf(" CATEGORIA: %s\n\n",nombre);
     printf(" Intentos: %i\t\t\t\tPuntuacion: %i\n\n",7-intentos,puntos);
@@ -234,7 +234,7 @@ void juego(char palabras[][15],char nombre[]) { //recibe la opcion y el nombre d
      printf("\n\n PERDISTE!! :C ");
      printf("La solucion era; %s \n\n",palabras[opcion]);
      printf("\n\n Puntuacion final: %d \n\n",puntos);
-      FILE * flujo = fopen("record.txt","a");
+      FILE * flujo = fopen("record.txt","a"); //abre el archivo y guarda el puntuaje
      if (flujo==NULL){
        perror("Error al abrir el archivo\n\n");
      } else{
@@ -278,7 +278,7 @@ void juego(char palabras[][15],char nombre[]) { //recibe la opcion y el nombre d
 	 if (espacios == 0){
 			printf("\n\n FELICIDADES GANASTE!! :) \n\n");
       printf("\n\n Puntuacion final: %d \n\n",puntos);
-      FILE * flujo = fopen("record.txt","a");
+      FILE * flujo = fopen("record.txt","a"); //abre el arhcivo de txt y guarda el puntuaje
      if (flujo==NULL){
        perror("Error al abrir el archivo\n\n");
      } else{
@@ -413,8 +413,5 @@ void fallos(int intentos) {
 	}
 }
 
-// guardar los puntajes en un archivo para cuando el juego se cierra mantener los datos
-
-  
 
 
