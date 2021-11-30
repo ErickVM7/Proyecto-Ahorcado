@@ -1,4 +1,4 @@
-// Borrador juego ahorcado
+//juego ahorcado
 
 //Librerías
 #include <stdio.h>
@@ -45,7 +45,7 @@ void menuPrincipal() //imprime el menu principal y recibe una opcion del jugador
 
     do
     {
-        system("cls");
+        system("clear");
         printf("\n\n\t\t\tAhorcado\n");
         printf("\t\t\t********\n");
         printf("\n\t1. Nueva partida\n");
@@ -92,7 +92,7 @@ void menuReglas() //reglas sobre el funcionamiento del juego
   char repetir = TRUE;
   do
   {
-   system("cls");
+   system("clear");
    printf("\n\n\t\t\tReglas\n");
    printf("\t\t\t------\n");
    printf("\tLas reglas son las siguientes: \n1. La opción de “Nueva Partida” permite al jugador ingresar un nombre, elegir una categoría de palabras e iniciar el juego de ahorcado. \n2. La opción de “Ranking” permite observar las posiciones actuales de las mejores puntuaciones y su usuario correspondiente. \n3. Después de cada juego, la cantidad de puntos que obtuvo el jugador al final se guarda automáticamente en el sistema. \n4. Si el nombre ingresado ya está registrado en el sistema, se le agregara un número al final del nombre según la cantidad de veces que haya sido ingresado. \n5. La partida se inicia con 500 puntos, cada intento fallido de ingresar una letra implica una pérdida de 100 puntos. \n6. El juego se pierde si el jugador no logra encontrar la palabra en menos de 5 intentos o llega a 0 puntos, lo que suceda primero. En caso de perder, saldrá la frase “Ahorcado” y juntos con dos opciones: “Volver al Menú” (pantalla inicial) o “Salir” (el cual permite finalizar el juego). \n7. Si el jugador gana, saldrá la frase “FELICIDADES, LOGRÓ COMPLETAR LA PALABRA”, y se guardará la puntuación. \n8. Debera colocar la letra en minuscula");
